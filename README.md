@@ -15,7 +15,8 @@
 - Got Symbols Mapping
 - Now to get FAPs working, most do not work even if they did in the past, seems like progress went backwards with the FAPs
 - Updates for Mouse Jacker and NRFSniffer, sorry you still need to compile to get them.
-- A few optimizations by [Unleashed/xMasterX](https://github.com/Eng1n33r/flipperzero-firmware) 
+- A few optimizations by [Unleashed/xMasterX](https://github.com/Eng1n33r/flipperzero-firmware)
+- Updated assets for Side B with most hidden apps
 
 <table width="100%" border="0" cellspacing="0">
   <tr> <td colspan=2> <h3>This software is for experimental purposes only and is not meant for any illegal activity/purposes. We do not condone illegal activity and strongly encourage keeping transmissions to legal/valid uses allowed by law.</h3> </td> </tr>
