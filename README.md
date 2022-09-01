@@ -143,6 +143,10 @@ $ ./fbt plugin_dist FIRMWARE_APP_SET=ext_apps
 - [Automatic shutdown on idle #1647 (By SHxKenzuto)](https://github.com/flipperdevices/flipperzero-firmware/pull/1647)
 - [Decode RAW recordings #1667 (By qistoph)](https://github.com/flipperdevices/flipperzero-firmware/pull/1667)
 - [Fix displaying LFRFID protocol names #1682 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/1682)
+- [Add support for Keri tags #1689 (By mauimauer)](https://github.com/flipperdevices/flipperzero-firmware/pull/1689)
+- [Add new card parsers #1503 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/1503)
+- [Add support for Gallagher tags #1680 (By mauimauer)](https://github.com/flipperdevices/flipperzero-firmware/pull/1680)
+- [NFC collect params for mfkey32 attack #1643 (By gornekich)](https://github.com/flipperdevices/flipperzero-firmware/pull/1643)
 
 </details>
 
