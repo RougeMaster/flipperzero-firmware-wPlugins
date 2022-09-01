@@ -35,6 +35,7 @@ App(
     provides=[
         # "APPS_BarcodeGenerator",
         "APPS_BluetoothRemote",
+        "APPS_Calculator",
         # "APPS_DolphinRestorer",
         # "APPS_DolphinBackup",
         # "APPS_FlipFrid",
@@ -104,6 +105,9 @@ App(
     name="Custom applications for main menu",
     apptype=FlipperAppType.METAPACKAGE,
     provides=[
+        "elf_loader",
+        "gpio",
+        "bad_usb",
         "ibutton",
         "u2f",
         "wifi_marauder",
