@@ -6,6 +6,7 @@
 <b>Latest Updates:</b>
 
 - Known Issues:			`FAP Loader`, `Chess` & `Chip8` (No Controls)
+- If you have any issue with something not listed in the "All Changes/Features" section, feel free to ask any questions you have in the main discord for Flipper Zero. They are a group, of free speech censoring GPL violators, that will surely ban you if you think diffrently than they want you to, and/or if you use their code in ways they have allowed under GPL. Unfortunately, the Flipper Zero community on the official Discord is toxic and will not grow unless a complete change of moderation is made.
 - Apps `HIDDEN` for compile space can be found on Side B in the update folder.
 - Added FAP Loader
 - Got Symbols Mapping
@@ -144,6 +145,8 @@ $ ./fbt plugin_dist FIRMWARE_APP_SET=ext_apps
 - [Decode RAW recordings #1667 (By qistoph)](https://github.com/flipperdevices/flipperzero-firmware/pull/1667)
 - [Fix displaying LFRFID protocol names #1682 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/1682)
 - [Add new card parsers #1503 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/1503)
+- [Fix Mifare Classic 4K reading of the last 8 sectors #1712 (By Astrrra)](https://github.com/flipperdevices/flipperzero-firmware/pull/1712)
+- [Picopass: detect and show SE / SIO #1701 (By pcunning)](https://github.com/flipperdevices/flipperzero-firmware/pull/1701)
 
 </details>
 
