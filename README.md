@@ -1,7 +1,7 @@
 <h2>
 
 [Flipper Zero Firmware](https://github.com/flipperdevices/flipperzero-firmware/blob/dev/ReadMe.md) <= READ THIS READ ME</h2>
-#### Thank you to all the supporters; this firmware is a fork of [Unleashed/xMasterX](https://github.com/Eng1n33r/flipperzero-firmware) & [the main Flipper Devices FW](https://github.com/flipperdevices/flipperzero-firmware)! I will try to keep active development and updates from both in this build along with any other projects that can be found to be useful to the community. I try to keep this FW build the most cutting edge with updates from both and updates from active community projects. All features and projects pulled are listed in expandable sections below. Please do [support us](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/SUPPORT.md), [xMasterX](https://github.com/Eng1n33r/flipperzero-firmware) & [Flipper Devices](https://github.com/flipperdevices/flipperzero-firmware)! Everyone gives much of their free time to ensure the success of the Flipper Zero!
+#### Thank you to all the supporters; this firmware is a fork of [Unleashed/xMasterX](https://github.com/Eng1n33r/flipperzero-firmware) & the main Flipper Devices FW! I will try to keep active development and updates from both in this build along with any other projects that can be found to be useful to the community. I try to keep this FW build the most cutting edge with updates from both and updates from active community projects. All features and projects pulled are listed in expandable sections below. Please do [support us](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/blob/420/SUPPORT.md) and/or [xMasterX](https://github.com/Eng1n33r/flipperzero-firmware)! Everyone gives much of their uncompensated free time to ensure the success of the Flipper Zero!
 
 <b>Latest Updates:</b>
 
@@ -71,7 +71,7 @@ $ ./fbt plugin_dist FIRMWARE_APP_SET=ext_apps
 - Animations: SubGHZ Scanning image with Pikachu [Thanks to Panzer00Z](https://github.com/Panzer00Z/flipperzero-firmware/blob/3a548ea9bb181c9348d8afb427890c411456134e/assets/icons/SubGhz/Scanning_123x52.png)
 - Assets: Includes a NFC Level 50 Link Amiibo
 - Assets: Includes a NFC Rick Roll link
-- Assets: Includes New Dolphin Animations: [Rick Roll, Matrix & Swim animations (By qqMajiKpp)], [Rukamon 2x and Agumon animations (By Syrius)], [Mew (By Arkaivos)], [Eye of the Flipper (By Kuronons)], [Shodan (By qqMajiKpp)], [Sirene & The Witch (By Haseo)], [Dino & A New Hope (By Haseo)], [Earth Arcadia (By Kuronons)] & [Kuronons Black Flags Collection (21 Animations)(By Kuronons)]
+- Assets: Includes New Dolphin Animations: [Rick Roll, Matrix & Swim animations (By qqMajiKpp)], [Rukamon 2x and Agumon animations (By Syrius)], [Mew (By Arkaivos)], [Eye of the Flipper (By Kuronons)], [Shodan (By qqMajiKpp)], [Sirene & The Witch (By Haseo)], [Dino & A New Hope (By Haseo)], [Earth Arcadia (By Kuronons)], [Kuronons Black Flags Collection (21 Animations)(By Kuronons)] & [D.Va (By Haseo)]
 - Assets: Includes sample Music Player tunes
 - Assets: Includes sample SubGHz assets for Crosswalk, Handicap Doors, Sextoys, Tesla Charge Port, and Unitree Go1 Robot Dog
 - Assets: Includes Sonic Screw Driver sound for the Wav Player
