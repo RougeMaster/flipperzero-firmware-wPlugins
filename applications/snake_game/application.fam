@@ -7,4 +7,5 @@ App(
     requires=["gui"],
     stack_size=1 * 1024,
     order=210,
+    fapp_icon="../../assets/icons/Archive/unknown_10px.png",
 )

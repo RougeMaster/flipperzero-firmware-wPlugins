@@ -103,8 +103,12 @@ static bool open_ducky_script(Stream* stream) {
     string_t path;
     string_init(path);
     string_set_str(path, MOUSEJACKER_APP_PATH_FOLDER);
+
+    DialogsFileBrowserOptions browser_options;
+      dialog_file_browser_set_basic_options(&browser_options, MOUSEJACKER_APP_PATH_EXTENSION, &I_badusb_10px);
+
     bool ret = dialog_file_browser_show(
-        dialogs, path, path, MOUSEJACKER_APP_PATH_EXTENSION, true, &I_badusb_10px, false);
+        dialogs, path, path, &browser_options);
 
     furi_record_close(RECORD_DIALOGS);
     if(ret) {
@@ -124,8 +128,12 @@ static bool open_addrs_file(Stream* stream) {
     string_t path;
     string_init(path);
     string_set_str(path, NRFSNIFF_APP_PATH_FOLDER);
+
+    DialogsFileBrowserOptions browser_options;
+      dialog_file_browser_set_basic_options(&browser_options, NRFSNIFF_APP_PATH_EXTENSION, &I_badusb_10px);
+
     bool ret = dialog_file_browser_show(
-        dialogs, path, path, NRFSNIFF_APP_PATH_EXTENSION, true, &I_sub1_10px, false);
+        dialogs, path, path, &browser_options);
 
     furi_record_close(RECORD_DIALOGS);
     if(ret) {

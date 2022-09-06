@@ -16,7 +16,9 @@
 #define FRAME_HEIGHT 12
 #define Y_OFFSET 3
 
-#define ITEM_LIST_LEN_MAX 100
+#define ITEM_LIST_LEN_MAX 50
+
+#define CUSTOM_ICON_MAX_SIZE 32
 
 typedef enum {
     BrowserItemTypeLoading,
@@ -28,25 +30,47 @@ typedef enum {
 typedef struct {
     string_t path;
     BrowserItemType type;
+    uint8_t* custom_icon_data;
+    string_t display_name;
 } BrowserItem_t;
 
 static void BrowserItem_t_init(BrowserItem_t* obj) {
     obj->type = BrowserItemTypeLoading;
     string_init(obj->path);
+    string_init(obj->display_name);
+    obj->custom_icon_data = NULL;
 }
 
 static void BrowserItem_t_init_set(BrowserItem_t* obj, const BrowserItem_t* src) {
     obj->type = src->type;
     string_init_set(obj->path, src->path);
+    string_init_set(obj->display_name, src->display_name);
+    if(src->custom_icon_data) {
+        obj->custom_icon_data = malloc(CUSTOM_ICON_MAX_SIZE);
+        memcpy(obj->custom_icon_data, src->custom_icon_data, CUSTOM_ICON_MAX_SIZE);
+    } else {
+        obj->custom_icon_data = NULL;
+    }
 }
 
 static void BrowserItem_t_set(BrowserItem_t* obj, const BrowserItem_t* src) {
     obj->type = src->type;
     string_set(obj->path, src->path);
+    string_set(obj->display_name, src->display_name);
+    if(src->custom_icon_data) {
+        obj->custom_icon_data = malloc(CUSTOM_ICON_MAX_SIZE);
+        memcpy(obj->custom_icon_data, src->custom_icon_data, CUSTOM_ICON_MAX_SIZE);
+    } else {
+        obj->custom_icon_data = NULL;
+    }
 }
 
 static void BrowserItem_t_clear(BrowserItem_t* obj) {
     string_clear(obj->path);
+    string_clear(obj->display_name);
+    if(obj->custom_icon_data) {
+        free(obj->custom_icon_data);
+    }
 }
 
 ARRAY_DEF(
@@ -62,9 +86,13 @@ struct FileBrowser {
     BrowserWorker* worker;
     const char* ext_filter;
     bool skip_assets;
+    bool hide_ext;
 
     FileBrowserCallback callback;
     void* context;
+
+    FileBrowserLoadItemCallback item_callback;
+    void* item_context;
 
     string_ptr result_path;
 };
@@ -148,6 +176,7 @@ void file_browser_configure(
 
     browser->ext_filter = extension;
     browser->skip_assets = skip_assets;
+    browser->hide_ext = hide_ext;
 
     with_view_model(
         browser->view, (FileBrowserModel * model) {
@@ -184,6 +213,14 @@ void file_browser_stop(FileBrowser* browser) {
 void file_browser_set_callback(FileBrowser* browser, FileBrowserCallback callback, void* context) {
     browser->context = context;
     browser->callback = callback;
+}
+
+void file_browser_set_item_callback(
+    FileBrowser* browser,
+    FileBrowserLoadItemCallback callback,
+    void* context) {
+    browser->item_context = context;
+    browser->item_callback = callback;
 }
 
 static bool browser_is_item_in_array(FileBrowserModel* model, uint32_t idx) {
@@ -304,18 +341,43 @@ static void browser_list_item_cb(void* context, string_t item_path, bool is_fold
     FileBrowser* browser = (FileBrowser*)context;
 
     BrowserItem_t item;
+    item.custom_icon_data = NULL;
 
     if(!is_last) {
-        BrowserItem_t_init(&item);
-        string_set(item.path, item_path);
-        item.type = (is_folder) ? BrowserItemTypeFolder : BrowserItemTypeFile;
+        string_init_set(item.path, item_path);
+        string_init(item.display_name);
+        if(is_folder) {
+            item.type = BrowserItemTypeFolder;
+        } else {
+            item.type = BrowserItemTypeFile;
+            if(browser->item_callback) {
+                item.custom_icon_data = malloc(CUSTOM_ICON_MAX_SIZE);
+                if(!browser->item_callback(
+                       item_path,
+                       browser->item_context,
+                       &item.custom_icon_data,
+                       item.display_name)) {
+                    free(item.custom_icon_data);
+                    item.custom_icon_data = NULL;
+                }
+            }
+        }
+
+        if(string_empty_p(item.display_name)) {
+            path_extract_filename(
+                item_path,
+                item.display_name,
+                (browser->hide_ext) && (item.type == BrowserItemTypeFile));
+        }
 
         with_view_model(
             browser->view, (FileBrowserModel * model) {
                 items_array_push_back(model->items, item);
-                return false;
+                // TODO: calculate if element is visible
+                return true;
             });
-        BrowserItem_t_clear(&item);
+        string_clear(item.display_name);
+        string_clear(item.path);
     } else {
         with_view_model(
             browser->view, (FileBrowserModel * model) {
@@ -372,13 +434,16 @@ static void browser_draw_list(Canvas* canvas, FileBrowserModel* model) {
         int32_t idx = CLAMP((uint32_t)(i + model->list_offset), model->item_cnt, 0u);
 
         BrowserItemType item_type = BrowserItemTypeLoading;
+        uint8_t* custom_icon_data = NULL;
 
         if(browser_is_item_in_array(model, idx)) {
             BrowserItem_t* item = items_array_get(
                 model->items, CLAMP(idx - model->array_offset, (int32_t)(array_size - 1), 0));
             item_type = item->type;
-            path_extract_filename(
-                item->path, filename, (model->hide_ext) && (item_type == BrowserItemTypeFile));
+            string_set(filename, item->display_name);
+            if(item_type == BrowserItemTypeFile) {
+                custom_icon_data = item->custom_icon_data;
+            }
         } else {
             string_set_str(filename, "---");
         }
@@ -396,7 +461,11 @@ static void browser_draw_list(Canvas* canvas, FileBrowserModel* model) {
             canvas_set_color(canvas, ColorBlack);
         }
 
-        if((item_type == BrowserItemTypeFile) && (model->file_icon)) {
+        if(custom_icon_data) {
+            // Currently only 10*10 icons are supported
+            canvas_draw_bitmap(
+                canvas, 2, Y_OFFSET + 1 + i * FRAME_HEIGHT, 10, 10, custom_icon_data);
+        } else if((item_type == BrowserItemTypeFile) && (model->file_icon)) {
             canvas_draw_icon(canvas, 2, Y_OFFSET + 1 + i * FRAME_HEIGHT, model->file_icon);
         } else if(BrowserItemIcons[item_type] != NULL) {
             canvas_draw_icon(

@@ -15,6 +15,9 @@ extern "C" {
 typedef struct FileBrowser FileBrowser;
 typedef void (*FileBrowserCallback)(void* context);
 
+typedef bool (
+    *FileBrowserLoadItemCallback)(string_t path, void* context, uint8_t** icon, string_t item_name);
+
 FileBrowser* file_browser_alloc(string_ptr result_path);
 
 void file_browser_free(FileBrowser* browser);
@@ -33,6 +36,11 @@ void file_browser_start(FileBrowser* browser, string_t path);
 void file_browser_stop(FileBrowser* browser);
 
 void file_browser_set_callback(FileBrowser* browser, FileBrowserCallback callback, void* context);
+
+void file_browser_set_item_callback(
+    FileBrowser* browser,
+    FileBrowserLoadItemCallback callback,
+    void* context);
 
 #ifdef __cplusplus
 }

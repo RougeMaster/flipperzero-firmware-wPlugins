@@ -39,7 +39,8 @@ class FlipperApplication:
     order: int = 0
     sdk_headers: List[str] = field(default_factory=list)
     version: Tuple[int] = field(default_factory=lambda: (0, 0))
-    fapp_icon: Optional[str] = None
+    fap_icon: Optional[str] = None
+    fap_libs: List[str] = field(default_factory=list)
     _appdir: Optional[str] = None
     _apppath: Optional[str] = None
 
@@ -55,6 +56,12 @@ class AppManager:
             raise FlipperManifestException(
                 f"Missing application manifest for '{appname}'"
             )
+
+    def find_by_appdir(self, appdir: str):
+        for app in self.known_apps.values():
+            if app._appdir == appdir:
+                return app
+        return None
 
     def load_manifest(self, app_manifest_path: str, app_dir_name: str):
         if not os.path.exists(app_manifest_path):

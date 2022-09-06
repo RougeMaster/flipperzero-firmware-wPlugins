@@ -217,4 +217,10 @@ vars.Add(
     default="default",
 )
 
+vars.Add(
+    "APPSRC",
+    help="Application source directory for app to build & upload",
+    default="",
+)
+
 Return("vars")

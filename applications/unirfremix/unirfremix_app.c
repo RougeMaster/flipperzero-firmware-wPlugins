@@ -928,9 +928,12 @@ int32_t unirfremix_app(void* p) {
 
     string_set_str(app->file_path, UNIRFMAP_FOLDER);
 
+    DialogsFileBrowserOptions browser_options;
+    dialog_file_browser_set_basic_options(&browser_options, UNIRFMAP_EXTENSION, &I_sub1_10px);
+
     DialogsApp* dialogs = furi_record_open(RECORD_DIALOGS);
     bool res = dialog_file_browser_show(
-        dialogs, app->file_path, app->file_path, UNIRFMAP_EXTENSION, true, &I_sub1_10px, true);
+        dialogs, app->file_path, app->file_path, &browser_options);
 
     furi_record_close(RECORD_DIALOGS);
     if(!res) {

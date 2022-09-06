@@ -34,17 +34,25 @@ appenv.AppendUnique(
         "-Xlinker",
         "-Map=${TARGET}.map",
     ],
+    LIBS=[
+        "m",
+        "gcc",
+    ],
 )
 
 
-extapps = {"compact": [], "debug": [], "validators": []}
+extapps = appenv["_extapps"] = {
+    "compact": {},
+    "debug": {},
+    "validators": {},
+}
 
 
 def build_app_as_external(env, appdef):
     compact_elf, debug_elf, validator = env.BuildAppElf(appdef)
-    extapps["compact"].append(compact_elf)
-    extapps["debug"].append(debug_elf)
-    extapps["validators"].append(validator)
+    extapps["compact"][appdef.appid] = compact_elf
+    extapps["debug"][appdef.appid] = debug_elf
+    extapps["validators"][appdef.appid] = validator
 
 
 for apptype in (
@@ -63,8 +71,15 @@ if extra_app_list := GetOption("extra_ext_apps"):
 
 
 if appenv["FORCE"]:
-    appenv.AlwaysBuild(extapps["compact"])
+    appenv.AlwaysBuild(extapps["compact"].values())
 
-Alias(appenv["FIRMWARE_BUILD_CFG"] + "_extapps", extapps["compact"])
+Alias(appenv["FIRMWARE_BUILD_CFG"] + "_extapps", extapps["compact"].values())
+
+if appsrc := appenv.subst("$APPSRC"):
+    appenv.PhonyTarget(
+        "launch_app",
+        "${PYTHON3} scripts/runfap.py ${SOURCE}",
+        source=appenv.GetExtAppFromPath(appsrc),
+    )
 
 Return("extapps")

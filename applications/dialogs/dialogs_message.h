@@ -15,6 +15,8 @@ typedef struct {
     const Icon* file_icon;
     string_ptr result_path;
     string_ptr preselected_filename;
+    FileBrowserLoadItemCallback item_callback;
+    void* item_callback_context;
 } DialogsAppMessageDataFileBrowser;
 
 typedef struct {
