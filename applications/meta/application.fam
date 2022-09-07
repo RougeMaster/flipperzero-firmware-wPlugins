@@ -47,10 +47,11 @@ App(
         # "APPS_NameChanger",
         # "APPS_NRFSniff",
         # "APPS_Paint",
-        "INTAPP_Picopass",
+        # "INTAPP_Picopass",
         # "APPS_SentrySafe",
         # "APPS_SpectrumAnalyzer",
         # "APPS_Sub_Playlist",
+        # "APPS_SubBrute",
         # "APPS_WAVPlayer",
     ],
 )
