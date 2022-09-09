@@ -6,12 +6,12 @@
 <b>Latest Updates:</b>
 
 - Known Issues:			`FAP Loader`, `Chess` & `Chip8` (No Controls)
-- If you have any issue with something not listed in the "All Changes/Features" section, feel free to ask any questions you have in the main discord for Flipper Zero.
 - Apps `HIDDEN` for compile space can be found on Side B in the update folder.
 - Added FAP Loader
 - Got Symbols Mapping
 - Now to get FAPs working, most do not work even if they did in the past, seems like progress went backwards with the FAPs
 - Doesn't compile after latest changes, feel free to PR further
+
 
 <table width="100%" border="0" cellspacing="0">
   <tr> <td colspan=2> <h3>This software is for experimental purposes only and is not meant for any illegal activity/purposes. We do not condone illegal activity and strongly encourage keeping transmissions to legal/valid uses allowed by law.</h3> </td> </tr>
@@ -68,12 +68,13 @@ $ ./fbt plugin_dist FIRMWARE_APP_SET=ext_apps
   <summary><B>All Changes/Features</b></summary><br/>
   
 - Animations: Hold Center to change Flipper idle animation. [Thanks to Zycenios](https://github.com/flipperdevices/flipperzero-firmware/commit/111786ef40e50a40d2e510595672b569d9b97bba) With changes by RogueMaster.
+- Animations: iButton and RFID P0kem0n images [Thanks to Panzer00Z](https://github.com/Panzer00Z/flipperzero-firmware/)
 - Animations: Idle animations will show all animations regardless of level and butthurt [Thanks to qqMajiKpp]
 - Animations: RM FW Update image [(Thanks to E_Surge)](https://github.com/RogueMaster/flipperzero-firmware-wPlugins/pull/257)
 - Animations: SubGHZ Scanning image with Pikachu [Thanks to Panzer00Z](https://github.com/Panzer00Z/flipperzero-firmware/blob/3a548ea9bb181c9348d8afb427890c411456134e/assets/icons/SubGhz/Scanning_123x52.png)
 - Assets: Includes a NFC Level 50 Gan0n Amiibo
 - Assets: Includes a NFC Rick Roll link
-- Assets: Includes New Dolphin Animations: [Rick Roll, Matrix & Swim animations (By qqMajiKpp)], [Rukamon 2x and Agumon animations (By Syrius)], [Mew (By Arkaivos)], [Eye of the Flipper (By Kuronons)], [Shodan (By qqMajiKpp)], [Sirene & The Witch (By Haseo)], [Dino & A New Hope (By Haseo)], [Earth Arcadia (By Kuronons)], [Kuronons Black Flags Collection (21 Animations)(By Kuronons)], [D.Va (By Haseo)], [GITS (By Haseo)] & [Slayers (By qqMajiKpp)]
+- Assets: Includes New Dolphin Animations: [Rick Roll, Matrix & Swim animations (By qqMajiKpp)], [Rukamon 2x and Agumon animations (By Syrius)], [Mew (By Arkaivos)], [Eye of the Flipper (By Kuronons)], [Shodan (By qqMajiKpp)], [Sirene & The Witch (By Haseo)], [Dino & A New Hope (By Haseo)], [Earth Arcadia (By Kuronons)], [Kuronons Black Flags Collection (21 Animations)(By Kuronons)], [D.Va (By Haseo)], [GITS (By Haseo)], [Slayers (By qqMajiKpp)] & [P0liwhirl (By Panzer00Z)]
 - Assets: Includes sample Music Player tunes
 - Assets: Includes sample SubGHz assets for Crosswalk, Handicap Doors, Sextoys, Tesla Charge Port, and Unitree Go1 Robot Dog
 - Assets: Includes Sonic Screw Driver sound for the Wav Player
